@@ -1,0 +1,21 @@
+name: Radar Update
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Elke 5 minuten
+  workflow_dispatch:
+
+jobs:
+  post-radar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install requests
+      - name: Run script
+        env:
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        run: python radar_bot.py
