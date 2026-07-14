@@ -1,26 +1,26 @@
-name: Radar Update
+name: Radar Discord Bot
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 jobs:
-  post-radar:
+  radar:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Python installeren
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: "3.x"
 
-      - name: Install dependencies
+      - name: Dependencies
         run: pip install requests
 
-      - name: Run radar bot
+      - name: Radar sturen
         env:
-          WEBHOOK_URL: ${{ secrets.WEERRADAR }}
+          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
         run: python radar_bot.py
