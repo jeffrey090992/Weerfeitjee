@@ -7,6 +7,8 @@ WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
 
 def get_radar_image():
+
+    # RainViewer actuele radar
     api_url = "https://api.rainviewer.com/public/weather-maps.json"
 
     data = requests.get(api_url, timeout=20).json()
@@ -14,13 +16,21 @@ def get_radar_image():
     host = data["host"]
     path = data["radar"]["past"][-1]["path"]
 
+    # Nederland groter in beeld
     radar_url = (
-        f"{host}{path}/512/7/52.2/5.3/2/1_1.png"
+        f"{host}{path}/256/8/52.15/5.35/2/1_1.png"
     )
 
     print("Radar URL:", radar_url)
 
-    r = requests.get(radar_url, timeout=20)
+    r = requests.get(
+        radar_url,
+        headers={
+            "User-Agent": "Mozilla/5.0"
+        },
+        timeout=20
+    )
+
     r.raise_for_status()
 
     return r.content
@@ -46,10 +56,13 @@ def send_radar():
             {
                 "title": "🌧️ Actueel weerradar Nederland",
                 "description": datetime.now().strftime(
-                    "Update: %d-%m-%Y %H:%M:%S"
+                    "Update: %d-%m-%Y %H:%M"
                 ),
                 "image": {
                     "url": "attachment://radar.png"
+                },
+                "footer": {
+                    "text": "Radar via RainViewer"
                 }
             }
         ]
