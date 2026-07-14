@@ -1,14 +1,12 @@
 import requests
 import os
+import json
 from datetime import datetime
 
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
-# RainViewer radar kaart Nederland
-RADAR_URL = (
-    "https://tilecache.rainviewer.com/v2/radar/"
-    "latest/256/6/33/21/1/1_1.png"
-)
+# RainViewer radar tegel (Nederland/regio)
+RADAR_URL = "https://tilecache.rainviewer.com/v2/radar/latest/256/6/33/21/1/1_1.png"
 
 
 def send_radar():
@@ -16,22 +14,33 @@ def send_radar():
         print("❌ WEBHOOK_URL ontbreekt")
         return
 
+    # Radar ophalen
     try:
-        radar = requests.get(RADAR_URL, timeout=15)
-        radar.raise_for_status()
+        r = requests.get(RADAR_URL, timeout=20)
+        r.raise_for_status()
+
+        if "image" not in r.headers.get("content-type", ""):
+            print("❌ Geen afbeelding ontvangen")
+            print(r.text[:200])
+            return
+
     except Exception as e:
         print("❌ Radar ophalen mislukt:", e)
         return
 
+    # Discord bericht
     payload = {
         "embeds": [
             {
-                "title": "🌧️ Actueel radarbeeld",
+                "title": "🌧️ Actueel Weerradarbeeld",
                 "description": datetime.now().strftime(
                     "Update: %d-%m-%Y %H:%M:%S"
                 ),
                 "image": {
                     "url": "attachment://radar.png"
+                },
+                "footer": {
+                    "text": "Radar via RainViewer"
                 }
             }
         ]
@@ -40,7 +49,7 @@ def send_radar():
     files = {
         "file": (
             "radar.png",
-            radar.content,
+            r.content,
             "image/png"
         )
     }
@@ -48,13 +57,14 @@ def send_radar():
     response = requests.post(
         WEBHOOK_URL,
         data={
-            "payload_json": str(payload).replace("'", '"')
+            "payload_json": json.dumps(payload)
         },
-        files=files
+        files=files,
+        timeout=30
     )
 
     if response.status_code == 204:
-        print("✅ Radar verstuurd")
+        print("✅ Radar succesvol naar Discord gestuurd")
     else:
         print("❌ Discord fout:", response.status_code)
         print(response.text)
