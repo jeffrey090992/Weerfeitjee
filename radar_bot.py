@@ -2,7 +2,7 @@ import requests
 import os
 import time
 
-# Dit script haalt de webhook-URL veilig uit de GitHub Secrets
+# Haalt de webhook-URL uit de GitHub Secrets
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 
 def send_radar():
@@ -10,8 +10,7 @@ def send_radar():
         print("FOUT: Geen WEBHOOK_URL gevonden!")
         return
 
-    # De stabiele URL voor het actuele radarbeeld van Buienradar
-    # De tijdstempel aan het einde voorkomt dat Discord een oud plaatje uit de cache laat zien
+    # Directe URL naar het .png bestand met cache-busting
     radar_url = f"https://image.buienradar.nl/2.0/image/single/RadarMapNL?width=500&height=512&extension=png&renderType=block&_={int(time.time())}"
     
     payload = {
@@ -23,11 +22,13 @@ def send_radar():
         }]
     }
     
+    # Discord vereist vaak een User-Agent om afbeeldingen correct in te laden
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+    
     try:
-        # We voegen een User-Agent toe zodat de API het verzoek niet blokkeert
-        headers = {"User-Agent": "Mozilla/5.0"}
         response = requests.post(WEBHOOK_URL, json=payload, headers=headers)
-        
         if response.status_code == 204:
             print("Succesvol verstuurd naar Discord!")
         else:
