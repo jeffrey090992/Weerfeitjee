@@ -2,7 +2,7 @@ name: Radar Update
 on:
   schedule:
     - cron: '*/5 * * * *' # Elke 5 minuten
-  workflow_dispatch:
+  workflow_dispatch: # Hiermee kun je handmatig testen in het 'Actions' tabblad
 
 jobs:
   post-radar:
@@ -17,5 +17,5 @@ jobs:
         run: pip install requests
       - name: Run script
         env:
-          WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+          WEBHOOK_URL: ${{ secrets.WEERRADAR }} # Dit haalt jouw secret op
         run: python radar_bot.py
