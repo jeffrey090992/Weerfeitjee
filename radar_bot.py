@@ -9,29 +9,35 @@ def send_radar():
         print("FOUT: Geen WEBHOOK_URL gevonden!")
         return
 
-    # De directe link naar het actuele radarbeeld van Weerplaza
+    # De directe link naar het plaatje
     radar_url = "https://cdn.weerplaza.nl/data/radar/netherlands/radar_512x512.png"
     
-    # We sturen een embed omdat dit het plaatje direct in Discord laat zien
-    payload = {
-        "content": "Hier is het actuele radarbeeld van Weerplaza:",
-        "embeds": [{
-            "title": "Actuele Buienradar",
-            "image": {"url": radar_url},
-            "footer": {"text": "Bron: Weerplaza.nl"}
-        }]
-    }
-    
+    # 1. Download het plaatje naar een tijdelijk bestand
     headers = {"User-Agent": "Mozilla/5.0"}
-    
     try:
-        response = requests.post(WEBHOOK_URL, json=payload, headers=headers)
-        if response.status_code == 204:
-            print("Succesvol verstuurd naar Discord!")
+        response = requests.get(radar_url, headers=headers)
+        if response.status_code == 200:
+            with open("radar.png", "wb") as f:
+                f.write(response.content)
         else:
-            print(f"Fout bij versturen: {response.status_code}, {response.text}")
+            print(f"Kon plaatje niet downloaden, status: {response.status_code}")
+            return
     except Exception as e:
-        print(f"Er is een fout opgetreden: {e}")
+        print(f"Fout bij downloaden: {e}")
+        return
+
+    # 2. Verstuur het bestand naar Discord
+    # We sturen GEEN json, maar data + files
+    with open("radar.png", "rb") as f:
+        files = {'file': ('radar.png', f, 'image/png')}
+        data = {"content": "Hier is het actuele radarbeeld van Weerplaza:"}
+        
+        response = requests.post(WEBHOOK_URL, data=data, files=files)
+        
+        if response.status_code in [200, 204]:
+            print("Succesvol verstuurd als bestand!")
+        else:
+            print(f"Fout bij versturen naar Discord: {response.status_code}, {response.text}")
 
 if __name__ == "__main__":
     send_radar()
