@@ -1,21 +1,26 @@
 name: Radar Update
+
 on:
   schedule:
     - cron: '*/5 * * * *' # Elke 5 minuten
-  workflow_dispatch: # Hiermee kun je handmatig testen in het 'Actions' tabblad
+  workflow_dispatch:      # Hiermee kun je handmatig testen in het Actions tabblad
 
 jobs:
   post-radar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
       - name: Install dependencies
         run: pip install requests
-      - name: Run script
+
+      - name: Run radar bot
         env:
-          WEBHOOK_URL: ${{ secrets.WEERRADAR }} # Dit haalt jouw secret op
+          WEBHOOK_URL: ${{ secrets.WEERRADAR }}
         run: python radar_bot.py
