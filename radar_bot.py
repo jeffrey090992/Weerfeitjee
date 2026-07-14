@@ -4,7 +4,11 @@ from datetime import datetime
 
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
-RADAR_URL = "https://cdn.weerplaza.nl/data/radar/netherlands/radar_512x512.png"
+# RainViewer radar kaart Nederland
+RADAR_URL = (
+    "https://tilecache.rainviewer.com/v2/radar/"
+    "latest/256/6/33/21/1/1_1.png"
+)
 
 
 def send_radar():
@@ -12,7 +16,6 @@ def send_radar():
         print("❌ WEBHOOK_URL ontbreekt")
         return
 
-    # Radarbeeld ophalen
     try:
         radar = requests.get(RADAR_URL, timeout=15)
         radar.raise_for_status()
@@ -20,23 +23,20 @@ def send_radar():
         print("❌ Radar ophalen mislukt:", e)
         return
 
-    # Discord bericht
     payload = {
         "embeds": [
             {
-                "title": "🌧️ Actueel Radarbeeld Nederland",
-                "description": f"Laatste update: {datetime.now().strftime('%d-%m-%Y %H:%M:%S')}",
+                "title": "🌧️ Actueel radarbeeld",
+                "description": datetime.now().strftime(
+                    "Update: %d-%m-%Y %H:%M:%S"
+                ),
                 "image": {
                     "url": "attachment://radar.png"
-                },
-                "footer": {
-                    "text": "Weerplaza radar"
                 }
             }
         ]
     }
 
-    # Afbeelding uploaden naar Discord
     files = {
         "file": (
             "radar.png",
@@ -45,24 +45,19 @@ def send_radar():
         )
     }
 
-    try:
-        response = requests.post(
-            WEBHOOK_URL,
-            data={
-                "payload_json": str(payload).replace("'", '"')
-            },
-            files=files,
-            timeout=20
-        )
+    response = requests.post(
+        WEBHOOK_URL,
+        data={
+            "payload_json": str(payload).replace("'", '"')
+        },
+        files=files
+    )
 
-        if response.status_code == 204:
-            print("✅ Radar succesvol verstuurd")
-        else:
-            print("❌ Discord fout:", response.status_code)
-            print(response.text)
-
-    except Exception as e:
-        print("❌ Webhook fout:", e)
+    if response.status_code == 204:
+        print("✅ Radar verstuurd")
+    else:
+        print("❌ Discord fout:", response.status_code)
+        print(response.text)
 
 
 if __name__ == "__main__":
