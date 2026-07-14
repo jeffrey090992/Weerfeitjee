@@ -7,20 +7,22 @@ WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
 
 def get_radar_image():
-    # RainViewer actuele radar informatie
+    # RainViewer API voor actuele radar
     api_url = "https://api.rainviewer.com/public/weather-maps.json"
 
-    data = requests.get(api_url, timeout=20).json()
+    response = requests.get(api_url, timeout=20)
+    response.raise_for_status()
 
+    data = response.json()
+
+    # Laatste beschikbare radarbeeld
     host = data["host"]
-    latest = data["radar"]["past"][-1]
+    path = data["radar"]["past"][-1]["path"]
 
-    path = latest["path"]
-
-    # Nederland centrum:
-    # size / zoom / latitude / longitude / kleur / opties
+    # Nederland gecentreerd
+    # zoom 7 = dichterbij Nederland
     radar_url = (
-        f"{host}{path}/512/6/52.2/5.3/2/1_1.png"
+        f"{host}{path}/512/7/52.2/5.3/2/1_1.png"
     )
 
     print("Radar URL:")
@@ -38,21 +40,24 @@ def send_radar():
         print("❌ WEBHOOK_URL ontbreekt")
         return
 
+    # Radar ophalen
     try:
         image = get_radar_image()
-        print("✅ Radar afbeelding opgehaald")
+        print("✅ Radar opgehaald")
 
     except Exception as e:
         print("❌ Radar ophalen mislukt:", e)
         return
 
 
+    # Discord embed
     payload = {
         "embeds": [
             {
                 "title": "🌧️ Actueel weerradar Nederland",
-                "description": datetime.now().strftime(
-                    "Update: %d-%m-%Y %H:%M:%S"
+                "description": (
+                    "Update: "
+                    + datetime.now().strftime("%d-%m-%Y %H:%M:%S")
                 ),
                 "image": {
                     "url": "attachment://radar.png"
@@ -65,6 +70,7 @@ def send_radar():
     }
 
 
+    # Afbeelding uploaden
     files = {
         "file": (
             "radar.png",
@@ -74,7 +80,7 @@ def send_radar():
     }
 
 
-    response = requests.post(
+    result = requests.post(
         WEBHOOK_URL,
         data={
             "payload_json": json.dumps(payload)
@@ -84,11 +90,11 @@ def send_radar():
     )
 
 
-    if response.status_code == 204:
+    if result.status_code == 204:
         print("✅ Radar verstuurd naar Discord")
     else:
-        print("❌ Discord fout:", response.status_code)
-        print(response.text)
+        print("❌ Discord fout:", result.status_code)
+        print(result.text)
 
 
 if __name__ == "__main__":
