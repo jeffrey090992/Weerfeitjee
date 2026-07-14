@@ -7,21 +7,17 @@ def send_radar():
     if not WEBHOOK_URL:
         return
 
-    # Dit is een URL die een live snapshot van de KNMI-radar genereert
-    radar_url = "https://cdn.knmi.nl/knmi/map/preview/radar/radar-loop.gif"
+    # Gebruik een proxy-link die Discord meestal wel accepteert
+    radar_url = "https://images.weserv.nl/?url=https://cdn.weerplaza.nl/data/radar/netherlands/radar_512x512.png"
     
     payload = {
-        "content": "Actueel radarbeeld (KNMI):",
         "embeds": [{
+            "title": "Actueel Radarbeeld",
             "image": {"url": radar_url}
         }]
     }
     
-    try:
-        # Verstuur als JSON embed
-        requests.post(WEBHOOK_URL, json=payload)
-    except Exception as e:
-        print(e)
+    requests.post(WEBHOOK_URL, json=payload)
 
 if __name__ == "__main__":
     send_radar()
