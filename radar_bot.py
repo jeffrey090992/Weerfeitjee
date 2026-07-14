@@ -5,33 +5,50 @@ from datetime import datetime
 
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
-# RainViewer radarbeeld
-RADAR_URL = "https://tilecache.rainviewer.com/v2/radar/latest/256/6/33/21/1/1_1.png"
+
+def get_radar_image():
+    # Haal actuele radar informatie op
+    api = "https://api.rainviewer.com/public/weather-maps.json"
+
+    data = requests.get(api, timeout=15).json()
+
+    host = data["host"]
+    path = data["radar"]["past"][-1]["path"]
+
+    # Nederland ongeveer midden kaart
+    # formaat / zoom / lat / lon / kleur / opties
+    radar_url = (
+        f"{host}{path}/512/6/52.2/5.3/2/1_1.png"
+    )
+
+    print("Radar URL:")
+    print(radar_url)
+
+    img = requests.get(radar_url, timeout=20)
+    img.raise_for_status()
+
+    return img.content
 
 
 def send_radar():
+
     if not WEBHOOK_URL:
         print("❌ WEBHOOK_URL ontbreekt")
         return
 
-    # Radar ophalen
     try:
-        radar = requests.get(RADAR_URL, timeout=20)
-        radar.raise_for_status()
-
-        if "image" not in radar.headers.get("content-type", ""):
-            print("❌ Geen afbeelding ontvangen")
-            print(radar.headers.get("content-type"))
-            return
+        image = get_radar_image()
+        print("✅ Radar opgehaald")
 
     except Exception as e:
         print("❌ Radar ophalen mislukt:", e)
         return
 
+
     payload = {
         "embeds": [
             {
-                "title": "🌧️ Actueel weerradarbeeld",
+                "title": "🌧️ Actueel weerradar Nederland",
                 "description": datetime.now().strftime(
                     "Update: %d-%m-%Y %H:%M:%S"
                 ),
@@ -39,38 +56,37 @@ def send_radar():
                     "url": "attachment://radar.png"
                 },
                 "footer": {
-                    "text": "Radar via RainViewer"
+                    "text": "Bron: RainViewer"
                 }
             }
         ]
     }
 
+
     files = {
         "file": (
             "radar.png",
-            radar.content,
+            image,
             "image/png"
         )
     }
 
-    try:
-        response = requests.post(
-            WEBHOOK_URL,
-            data={
-                "payload_json": json.dumps(payload)
-            },
-            files=files,
-            timeout=30
-        )
 
-        if response.status_code == 204:
-            print("✅ Radar verstuurd naar Discord")
-        else:
-            print("❌ Discord fout:", response.status_code)
-            print(response.text)
+    response = requests.post(
+        WEBHOOK_URL,
+        data={
+            "payload_json": json.dumps(payload)
+        },
+        files=files,
+        timeout=30
+    )
 
-    except Exception as e:
-        print("❌ Webhook fout:", e)
+
+    if response.status_code == 204:
+        print("✅ Radar verstuurd naar Discord")
+    else:
+        print("❌ Discord fout:", response.status_code)
+        print(response.text)
 
 
 if __name__ == "__main__":
