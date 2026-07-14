@@ -7,16 +7,18 @@ WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
 
 def get_radar_image():
-    # Haal actuele radar informatie op
-    api = "https://api.rainviewer.com/public/weather-maps.json"
+    # RainViewer actuele radar informatie
+    api_url = "https://api.rainviewer.com/public/weather-maps.json"
 
-    data = requests.get(api, timeout=15).json()
+    data = requests.get(api_url, timeout=20).json()
 
     host = data["host"]
-    path = data["radar"]["past"][-1]["path"]
+    latest = data["radar"]["past"][-1]
 
-    # Nederland ongeveer midden kaart
-    # formaat / zoom / lat / lon / kleur / opties
+    path = latest["path"]
+
+    # Nederland centrum:
+    # size / zoom / latitude / longitude / kleur / opties
     radar_url = (
         f"{host}{path}/512/6/52.2/5.3/2/1_1.png"
     )
@@ -24,10 +26,10 @@ def get_radar_image():
     print("Radar URL:")
     print(radar_url)
 
-    img = requests.get(radar_url, timeout=20)
-    img.raise_for_status()
+    image = requests.get(radar_url, timeout=20)
+    image.raise_for_status()
 
-    return img.content
+    return image.content
 
 
 def send_radar():
@@ -38,7 +40,7 @@ def send_radar():
 
     try:
         image = get_radar_image()
-        print("✅ Radar opgehaald")
+        print("✅ Radar afbeelding opgehaald")
 
     except Exception as e:
         print("❌ Radar ophalen mislukt:", e)
