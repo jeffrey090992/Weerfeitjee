@@ -5,7 +5,7 @@ from datetime import datetime
 
 WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
-# RainViewer radar tegel (Nederland/regio)
+# RainViewer radarbeeld
 RADAR_URL = "https://tilecache.rainviewer.com/v2/radar/latest/256/6/33/21/1/1_1.png"
 
 
@@ -16,23 +16,22 @@ def send_radar():
 
     # Radar ophalen
     try:
-        r = requests.get(RADAR_URL, timeout=20)
-        r.raise_for_status()
+        radar = requests.get(RADAR_URL, timeout=20)
+        radar.raise_for_status()
 
-        if "image" not in r.headers.get("content-type", ""):
+        if "image" not in radar.headers.get("content-type", ""):
             print("❌ Geen afbeelding ontvangen")
-            print(r.text[:200])
+            print(radar.headers.get("content-type"))
             return
 
     except Exception as e:
         print("❌ Radar ophalen mislukt:", e)
         return
 
-    # Discord bericht
     payload = {
         "embeds": [
             {
-                "title": "🌧️ Actueel Weerradarbeeld",
+                "title": "🌧️ Actueel weerradarbeeld",
                 "description": datetime.now().strftime(
                     "Update: %d-%m-%Y %H:%M:%S"
                 ),
@@ -49,25 +48,29 @@ def send_radar():
     files = {
         "file": (
             "radar.png",
-            r.content,
+            radar.content,
             "image/png"
         )
     }
 
-    response = requests.post(
-        WEBHOOK_URL,
-        data={
-            "payload_json": json.dumps(payload)
-        },
-        files=files,
-        timeout=30
-    )
+    try:
+        response = requests.post(
+            WEBHOOK_URL,
+            data={
+                "payload_json": json.dumps(payload)
+            },
+            files=files,
+            timeout=30
+        )
 
-    if response.status_code == 204:
-        print("✅ Radar succesvol naar Discord gestuurd")
-    else:
-        print("❌ Discord fout:", response.status_code)
-        print(response.text)
+        if response.status_code == 204:
+            print("✅ Radar verstuurd naar Discord")
+        else:
+            print("❌ Discord fout:", response.status_code)
+            print(response.text)
+
+    except Exception as e:
+        print("❌ Webhook fout:", e)
 
 
 if __name__ == "__main__":
