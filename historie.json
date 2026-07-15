@@ -749,3 +749,103 @@
     "tekst": "Een zware storm trok over Nederland tijdens de donkere dagen."
   }
 ]
+[
+  {
+    "datum": "27 juni",
+    "seizoen": "☀️ Zomer",
+    "jaar": "1947",
+    "titel": "🔥 Zeer warme zomer",
+    "tekst": "Een uitzonderlijk warme zomerperiode met veel tropische dagen."
+  },
+  {
+    "datum": "23 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "1944",
+    "titel": "🌡️ Historische hitte",
+    "tekst": "Een zeer warme periode met hoge temperaturen in Nederland."
+  },
+  {
+    "datum": "2 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2015",
+    "titel": "🔥 Hittegolf",
+    "tekst": "Een warme periode met meerdere tropische dagen."
+  },
+  {
+    "datum": "26 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2018",
+    "titel": "🌡️ Warme zomerperiode",
+    "tekst": "Een langdurige hitteperiode tijdens de extreem droge zomer van 2018."
+  },
+  {
+    "datum": "25 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2019",
+    "titel": "🔥 Temperatuurrecord",
+    "tekst": "Nederland beleefde een extreem warme dag tijdens een recordzomer."
+  },
+  {
+    "datum": "8 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2020",
+    "titel": "🔥 Extreme hitte",
+    "tekst": "Een periode met hoge temperaturen en tropische nachten."
+  },
+  {
+    "datum": "13 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2003",
+    "titel": "🔥 Europese hittegolf",
+    "tekst": "De grote Europese hittegolf zorgde ook in Nederland voor extreme warmte."
+  },
+  {
+    "datum": "15 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1963",
+    "titel": "🥶 Legendarische winter",
+    "tekst": "De winter van 1963 kende langdurige strenge vorst en veel ijs."
+  },
+  {
+    "datum": "18 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1942",
+    "titel": "🥶 Extreme kou",
+    "tekst": "Een zeer koude winterperiode met strenge vorst."
+  },
+  {
+    "datum": "4 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1929",
+    "titel": "🧊 Strenge winter",
+    "tekst": "Een van de koudste winters uit de Nederlandse meetgeschiedenis."
+  },
+  {
+    "datum": "10 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1956",
+    "titel": "🥶 Koude februari",
+    "tekst": "Een zeer koude maand met langdurige vorst."
+  },
+  {
+    "datum": "5 maart",
+    "seizoen": "🌱 Lente",
+    "jaar": "1971",
+    "titel": "❄️ Koude lente-start",
+    "tekst": "De lente begon met winterse temperaturen."
+  },
+  {
+    "datum": "7 april",
+    "seizoen": "🌱 Lente",
+    "jaar": "2011",
+    "titel": "☀️ Warme april",
+    "tekst": "Een zonnige en warme periode zorgde voor zomerse trekjes."
+  },
+  {
+    "datum": "14 mei",
+    "seizoen": "🌱 Lente",
+    "jaar": "2022",
+    "titel": "☀️ Warme meiperiode",
+    "tekst": "Een periode met veel zon en hoge temperaturen."
+  }
+]
