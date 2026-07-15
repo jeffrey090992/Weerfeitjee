@@ -935,3 +935,89 @@
     "tekst": "Koude buien brachten hagel en lokaal sneeuw."
   }
 ]
+[
+  {
+    "datum": "1 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1953",
+    "titel": "🌊 Watersnoodramp",
+    "tekst": "Een zware stormvloed veroorzaakte grote overstromingen in Zeeland, Zuid-Holland en Noord-Brabant."
+  },
+  {
+    "datum": "3 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1976",
+    "titel": "🌊 Hoogwaterperiode",
+    "tekst": "Zware stormen zorgden voor hoge waterstanden langs de kust."
+  },
+  {
+    "datum": "13 september",
+    "seizoen": "🍂 Herfst",
+    "jaar": "1998",
+    "titel": "🌧️ Extreme regenval",
+    "tekst": "Grote hoeveelheden regen veroorzaakten lokaal wateroverlast."
+  },
+  {
+    "datum": "20 oktober",
+    "seizoen": "🍂 Herfst",
+    "jaar": "2000",
+    "titel": "🌧️ Natte herfst",
+    "tekst": "Een zeer natte periode zorgde voor hoge grondwaterstanden en overlast."
+  },
+  {
+    "datum": "3 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2004",
+    "titel": "🌧️ Zware zomerregen",
+    "tekst": "Plaatselijk viel zeer veel regen in korte tijd."
+  },
+  {
+    "datum": "28 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2010",
+    "titel": "🌧️ Wateroverlast",
+    "tekst": "Hevige buien veroorzaakten lokaal grote hoeveelheden neerslag."
+  },
+  {
+    "datum": "28 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2014",
+    "titel": "🌧️ Extreme buien",
+    "tekst": "Zware regenbuien zorgden voor ondergelopen straten en kelders."
+  },
+  {
+    "datum": "1 juni",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2016",
+    "titel": "🌧️ Wateroverlast door buien",
+    "tekst": "Krachtige regenbuien veroorzaakten lokaal veel schade."
+  },
+  {
+    "datum": "13 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2021",
+    "titel": "🌊 Hoogwater in Limburg",
+    "tekst": "Extreme regenval in het stroomgebied van de Maas veroorzaakte zware overstromingen."
+  },
+  {
+    "datum": "14 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2021",
+    "titel": "🌊 Watersnood Limburg",
+    "tekst": "Rivieren traden buiten hun oevers na uitzonderlijke neerslag."
+  },
+  {
+    "datum": "15 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2021",
+    "titel": "🌧️ Extreme neerslag",
+    "tekst": "Een uitzonderlijk natte periode veroorzaakte grote problemen in delen van Nederland."
+  },
+  {
+    "datum": "5 oktober",
+    "seizoen": "🍂 Herfst",
+    "jaar": "2011",
+    "titel": "🌧️ Herfstwateroverlast",
+    "tekst": "Veel regen in korte tijd veroorzaakte problemen op meerdere plaatsen."
+  }
+]
