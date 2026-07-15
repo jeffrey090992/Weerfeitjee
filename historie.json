@@ -663,3 +663,89 @@
     "tekst": "Een zware noordwesterstorm veroorzaakte hoogwater en overlast."
   }
 ]
+[
+  {
+    "datum": "2 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1976",
+    "titel": "🌪️ Zware januaristorm",
+    "tekst": "Een krachtige storm trok over Nederland met zware windstoten en schade."
+  },
+  {
+    "datum": "13 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1993",
+    "titel": "🌪️ Noordwesterstorm",
+    "tekst": "Een stormdepressie zorgde voor zware wind langs de kust."
+  },
+  {
+    "datum": "27 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1990",
+    "titel": "💨 Onstuimige winterdag",
+    "tekst": "Een actieve storing bracht veel wind en regen."
+  },
+  {
+    "datum": "9 april",
+    "seizoen": "🌱 Lente",
+    "jaar": "1998",
+    "titel": "🌪️ Voorjaarsstorm",
+    "tekst": "Een ongebruikelijk zware storm trok in het voorjaar over Nederland."
+  },
+  {
+    "datum": "14 mei",
+    "seizoen": "🌱 Lente",
+    "jaar": "2000",
+    "titel": "⛈️ Zware lentebuien",
+    "tekst": "Onweersbuien met hagel trokken over verschillende provincies."
+  },
+  {
+    "datum": "22 juni",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2016",
+    "titel": "⛈️ Zwaar zomeronweer",
+    "tekst": "Hevige onweersbuien veroorzaakten lokaal wateroverlast."
+  },
+  {
+    "datum": "10 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2008",
+    "titel": "⛈️ Hagelstorm",
+    "tekst": "Zware buien brachten grote hagelstenen en windstoten."
+  },
+  {
+    "datum": "23 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "1975",
+    "titel": "🌪️ Zomerstorm",
+    "tekst": "Een zeldzaam krachtige zomerstorm trof delen van Nederland."
+  },
+  {
+    "datum": "12 september",
+    "seizoen": "🍂 Herfst",
+    "jaar": "1999",
+    "titel": "🌪️ Herfststorm",
+    "tekst": "Een stormachtige periode met harde wind en veel regen."
+  },
+  {
+    "datum": "28 oktober",
+    "seizoen": "🍂 Herfst",
+    "jaar": "2013",
+    "titel": "🌪️ Grote herfststorm",
+    "tekst": "Een zware storm veroorzaakte veel schade en verkeersproblemen."
+  },
+  {
+    "datum": "25 november",
+    "seizoen": "🍂 Herfst",
+    "jaar": "2005",
+    "titel": "🌨️ Winterse storm",
+    "tekst": "Koude lucht en zware buien zorgden voor winters weer."
+  },
+  {
+    "datum": "18 december",
+    "seizoen": "❄️ Winter",
+    "jaar": "1965",
+    "titel": "🌪️ Decemberstorm",
+    "tekst": "Een zware storm trok over Nederland tijdens de donkere dagen."
+  }
+]
