@@ -1,14 +1,93 @@
 [
   {
-    "datum": "25 juli 2019",
-    "categorie": "🔥 Hitte",
-    "titel": "Nationaal warmterecord",
-    "tekst": "Nederland beleefde een extreme hittegolf met zeer hoge temperaturen."
+    "datum": "1 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1979",
+    "titel": "❄️ Strenge winter van 1979",
+    "tekst": "Nederland kreeg te maken met extreme kou, sneeuwstormen en zware verkeersproblemen."
   },
   {
-    "datum": "5 juli 2023",
-    "categorie": "🌪️ Storm",
-    "titel": "Zomerstorm Poly",
-    "tekst": "Een zeer zware zomerstorm trok over Nederland en veroorzaakte veel schade."
+    "datum": "2 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1976",
+    "titel": "🌪️ Zware januaristorm",
+    "tekst": "Een krachtige storm trok over Nederland met zware windstoten."
+  },
+  {
+    "datum": "3 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1979",
+    "titel": "🌨️ Sneeuwstorm",
+    "tekst": "Een zware sneeuwstorm legde grote delen van Nederland tijdelijk stil."
+  },
+  {
+    "datum": "10 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1985",
+    "titel": "🧊 Strenge vorstperiode",
+    "tekst": "Een koude periode met veel ijsdagen en lage temperaturen."
+  },
+  {
+    "datum": "18 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "2018",
+    "titel": "🌪️ Storm Friederike",
+    "tekst": "Een zware storm veroorzaakte veel schade en zeer zware windstoten."
+  },
+  {
+    "datum": "25 januari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1990",
+    "titel": "🌪️ Storm van 1990",
+    "tekst": "Een van de zwaarste stormen van de twintigste eeuw trok over Nederland."
+  },
+  {
+    "datum": "1 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1953",
+    "titel": "🌊 Watersnoodramp",
+    "tekst": "Een zware stormvloed veroorzaakte grote overstromingen in Zeeland en Zuid-Holland."
+  },
+  {
+    "datum": "8 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "2021",
+    "titel": "❄️ Sneeuwstorm Darcy",
+    "tekst": "Een periode met veel sneeuw, harde wind en zeer lage gevoelstemperaturen."
+  },
+  {
+    "datum": "14 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "2021",
+    "titel": "🧊 Strenge vorst",
+    "tekst": "Nederland beleefde een koude periode met schaatsijs op veel plaatsen."
+  },
+  {
+    "datum": "18 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "2022",
+    "titel": "🌪️ Storm Dudley",
+    "tekst": "Een zware storm trok over Nederland vlak voor storm Eunice."
+  },
+  {
+    "datum": "20 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "2022",
+    "titel": "🌪️ Storm Eunice",
+    "tekst": "Een uitzonderlijk zware storm met zeer zware windstoten en grote schade."
+  },
+  {
+    "datum": "22 februari",
+    "seizoen": "❄️ Winter",
+    "jaar": "1956",
+    "titel": "🥶 Extreme kou",
+    "tekst": "Een zeer koude wintermaand met strenge vorst."
+  },
+  {
+    "datum": "1 maart",
+    "seizoen": "❄️ Winter",
+    "jaar": "1987",
+    "titel": "❄️ Late winterkou",
+    "tekst": "Een koude periode hield aan tot in het begin van maart."
   }
 ]
