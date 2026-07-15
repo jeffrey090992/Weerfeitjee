@@ -849,3 +849,89 @@
     "tekst": "Een periode met veel zon en hoge temperaturen."
   }
 ]
+[
+  {
+    "datum": "23 juni",
+    "seizoen": "☀️ Zomer",
+    "jaar": "1957",
+    "titel": "⛈️ Zwaar zomeronweer",
+    "tekst": "Krachtige onweersbuien trokken over Nederland met veel bliksem en zware regen."
+  },
+  {
+    "datum": "12 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2010",
+    "titel": "⛈️ Hagelbuien en noodweer",
+    "tekst": "Zware buien brachten hagel, windstoten en wateroverlast."
+  },
+  {
+    "datum": "28 juli",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2011",
+    "titel": "⛈️ Zwaar onweer",
+    "tekst": "Felle onweersbuien trokken over Nederland met lokaal veel schade."
+  },
+  {
+    "datum": "5 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2010",
+    "titel": "⚡ Bliksemrijke dag",
+    "tekst": "Veel onweersactiviteit zorgde voor honderden bliksemontladingen."
+  },
+  {
+    "datum": "18 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2004",
+    "titel": "⛈️ Extreem zomeronweer",
+    "tekst": "Zware onweerscellen veroorzaakten lokaal wateroverlast."
+  },
+  {
+    "datum": "21 augustus",
+    "seizoen": "☀️ Zomer",
+    "jaar": "2012",
+    "titel": "🌩️ Onweerscomplex",
+    "tekst": "Een groot buiengebied trok over Nederland met veel bliksem."
+  },
+  {
+    "datum": "23 mei",
+    "seizoen": "🌱 Lente",
+    "jaar": "2009",
+    "titel": "⛈️ Voorjaarsonweer",
+    "tekst": "Zware onweersbuien kwamen vroeg in het seizoen voor."
+  },
+  {
+    "datum": "30 mei",
+    "seizoen": "🌱 Lente",
+    "jaar": "2018",
+    "titel": "🌩️ Krachtige lentebuien",
+    "tekst": "Onweersbuien met hagel trokken over meerdere provincies."
+  },
+  {
+    "datum": "14 september",
+    "seizoen": "🍂 Herfst",
+    "jaar": "1998",
+    "titel": "⛈️ Herfstonweer",
+    "tekst": "Zware buien met onweer en veel regen trokken over Nederland."
+  },
+  {
+    "datum": "9 oktober",
+    "seizoen": "🍂 Herfst",
+    "jaar": "2009",
+    "titel": "🌧️ Zware herfstbuien",
+    "tekst": "Veel regen in korte tijd zorgde lokaal voor wateroverlast."
+  },
+  {
+    "datum": "20 november",
+    "seizoen": "🍂 Herfst",
+    "jaar": "2006",
+    "titel": "🌩️ Laat herfstonweer",
+    "tekst": "Ongebruikelijk laat in het jaar kwamen onweersbuien voor."
+  },
+  {
+    "datum": "29 december",
+    "seizoen": "❄️ Winter",
+    "jaar": "2012",
+    "titel": "🌨️ Winterse buien",
+    "tekst": "Koude buien brachten hagel en lokaal sneeuw."
+  }
+]
