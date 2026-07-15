@@ -1,34 +1,21 @@
 import json
-from datetime import datetime
 
-# 1. JSON-bestand inladen
-try:
-    with open('weer_historie.json', 'r', encoding='utf-8') as f:
-        # Dit bestand is een lijst van lijsten (data = [[{...}, {...}], [{...}]])
-        data = json.load(f)
-except FileNotFoundError:
-    print("Fout: Het bestand 'weer_historie.json' is niet gevonden.")
-    exit()
+# 1. Bestand inladen
+with open('weer_historie.json', 'r', encoding='utf-8') as f:
+    data = json.load(f)
 
-# 2. Huidige datum bepalen (bijv. "15 juli")
-# Let op: Zorg dat je JSON-datumformaat ("15 juli") overeenkomt met de output hieronder
-vandaag = datetime.now().strftime("%-d %B").lower() 
+# 2. Vandaag vastleggen (exact zoals in jouw JSON)
+vandaag = "15 juli"
 
-# 3. Zoekfunctie voor geneste lijst
-gevonden_feiten = []
-
+# 3. Zoeken in de geneste lijst
+gevonden = False
 for sublijst in data:
     for item in sublijst:
-        # Vergelijking maken (maak beide lowercase voor zekerheid)
-        if item.get("datum", "").lower() == vandaag:
-            gevonden_feiten.append(item)
+        if item["datum"] == vandaag:
+            print(f"Gevonden: {item['titel']}")
+            print(f"Jaar: {item['jaar']}")
+            print(f"Tekst: {item['tekst']}")
+            gevonden = True
 
-# 4. Resultaat tonen
-if gevonden_feiten:
-    for feit in gevonden_feiten:
-        print(f"--- {feit['titel']} ---")
-        print(f"Datum: {feit['datum']} ({feit['jaar']})")
-        print(f"Seizoen: {feit['seizoen']}")
-        print(f"Tekst: {feit['tekst']}\n")
-else:
-    print(f"Geen historisch weerfeit gevonden voor {vandaag}.")
+if not gevonden:
+    print(f"Geen weerfeit gevonden voor {vandaag}")
