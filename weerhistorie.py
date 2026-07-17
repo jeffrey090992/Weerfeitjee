@@ -16,7 +16,7 @@ def verstuur_weer_bericht():
         print(f"Fout bij inladen JSON: {e}")
         return
 
-    # 3. Vertaallijst voor mooiere teksten
+    # 3. Vertaallijst
     labels = {
         "hoogste_max": "☀️ Hoogste maximumtemperatuur",
         "laagste_min": "❄️ Laagste minimumtemperatuur"
@@ -34,17 +34,17 @@ def verstuur_weer_bericht():
             gevonden = True
             
             # Bepaal titel en kleur
-            titel = labels.get(item['record_type'], item['record_type'])
+            titel_tekst = labels.get(item['record_type'], item['record_type'])
             kleur = 16753920 if "hoogste" in item['record_type'] else 3447003
             
             # 5. Discord Embed opmaak
             message = {
                 "embeds": [{
-                    "title": "Weerfeitje van de dag 🌤️",
+                    "title": f"Dagrecord - {vandaag}",
                     "description": f"Op deze dag in de geschiedenis:",
                     "color": kleur,
                     "fields": [
-                        {"name": "Type record", "value": titel, "inline": False},
+                        {"name": "Type record", "value": titel_tekst, "inline": False},
                         {"name": "Temperatuur", "value": f"{item['temperatuur']}°C", "inline": True},
                         {"name": "Jaar", "value": str(item['jaar']), "inline": True},
                         {"name": "Station", "value": item['station'], "inline": True}
