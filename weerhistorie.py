@@ -4,46 +4,60 @@ import requests
 from datetime import datetime
 
 def verstuur_weer_bericht():
-    # 1. Bepaal de huidige datum (DD-MM)
+    # 1. Bepaal de huidige datum
     vandaag = datetime.now().strftime("%d-%m")
-    print(f"DEBUG: Zoeken naar records voor datum: {vandaag}")
+    print(f"Zoeken naar records voor: {vandaag}")
     
-    # 2. JSON bestand inladen
+    # 2. JSON inladen
     try:
         with open('weer_historie.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
     except Exception as e:
-        print(f"ERROR: Kon JSON niet laden: {e}")
+        print(f"Fout bij inladen JSON: {e}")
         return
 
-    # 3. Zoeken naar matches
-    gevonden = False
-    webhook_url = os.environ.get('HISTORIE_WEBHOOK')
+    # 3. Vertaallijst voor mooiere teksten
+    labels = {
+        "hoogste_max": "☀️ Hoogste maximumtemperatuur",
+        "laagste_min": "❄️ Laagste minimumtemperatuur"
+    }
 
+    # 4. Zoeken naar matches
+    webhook_url = os.environ.get('HISTORIE_WEBHOOK')
+    if not webhook_url:
+        print("Fout: HISTORIE_WEBHOOK niet gevonden in omgeving.")
+        return
+
+    gevonden = False
     for item in data:
-        # We vergelijken de string direct
-        if item.get("datum") == vandaag:
+        if isinstance(item, dict) and item.get("datum") == vandaag:
             gevonden = True
-            print(f"MATCH gevonden: {item}")
             
-            # 4. Bericht opstellen
+            # Bepaal titel en kleur
+            titel = labels.get(item['record_type'], item['record_type'])
+            kleur = 16753920 if "hoogste" in item['record_type'] else 3447003
+            
+            # 5. Discord Embed opmaak
             message = {
-                "content": (f"**Weerfeitje voor {vandaag}:**\n"
-                            f"Record: {item['record_type']}\n"
-                            f"Temperatuur: {item['temperatuur']}°C\n"
-                            f"Jaar: {item['jaar']}\n"
-                            f"Station: {item['station']}")
+                "embeds": [{
+                    "title": "Weerfeitje van de dag 🌤️",
+                    "description": f"Op deze dag in de geschiedenis:",
+                    "color": kleur,
+                    "fields": [
+                        {"name": "Type record", "value": titel, "inline": False},
+                        {"name": "Temperatuur", "value": f"{item['temperatuur']}°C", "inline": True},
+                        {"name": "Jaar", "value": str(item['jaar']), "inline": True},
+                        {"name": "Station", "value": item['station'], "inline": True}
+                    ]
+                }]
             }
             
-            # 5. Versturen naar Discord
-            if webhook_url:
-                response = requests.post(webhook_url, json=message)
-                print(f"Discord API status: {response.status_code}")
-            else:
-                print("ERROR: HISTORIE_WEBHOOK ontbreekt.")
+            # Versturen
+            response = requests.post(webhook_url, json=message)
+            print(f"Verstuurd! Status code: {response.status_code}")
 
     if not gevonden:
-        print(f"Geen records gevonden voor {vandaag}. Controleer je JSON-formaat.")
+        print("Geen records gevonden voor vandaag.")
 
 if __name__ == "__main__":
     verstuur_weer_bericht()
