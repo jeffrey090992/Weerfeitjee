@@ -1,35 +1,49 @@
 import json
-import datetime
 import os
-
-# 1. Bepaal de huidige datum in het formaat DD-MM
-vandaag = datetime.datetime.now().strftime("%d-%m")
-vandaag_zoekterm = vandaag.strip().lower()
+import requests
+from datetime import datetime
 
 def verstuur_weer_bericht():
-    # 2. Zorg dat het pad correct is
-    bestandspad = os.path.join(os.path.dirname(__file__), 'weer_historie.json')
+    # 1. Bepaal de huidige datum (DD-MM)
+    vandaag = datetime.now().strftime("%d-%m")
+    print(f"DEBUG: Zoeken naar records voor datum: {vandaag}")
     
+    # 2. JSON bestand inladen
     try:
-        with open(bestandspad, 'r', encoding='utf-8') as f:
+        with open('weer_historie.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError) as e:
-        print(f"Fout bij het openen van JSON: {e}")
+    except Exception as e:
+        print(f"ERROR: Kon JSON niet laden: {e}")
         return
 
-    # 3. Veilige loop met type-controle
+    # 3. Zoeken naar matches
+    gevonden = False
+    webhook_url = os.environ.get('HISTORIE_WEBHOOK')
+
     for item in data:
-        # Controleer of item een dictionary is
-        if isinstance(item, dict):
-            # Gebruik .get() veilig
-            datum = item.get("datum", "")
-            if datum.strip().lower() == vandaag_zoekterm:
-                print(f"Match gevonden voor {vandaag}: {item}")
-                # Hier komt jouw logica om het bericht te sturen via de webhook
-                # bijv: requests.post(os.environ['HISTORIE_WEBHOOK'], json=item)
-        else:
-            # Als er per ongeluk een string in de lijst staat, negeren we deze
-            print(f"Skipping ongeldig item: {type(item)} - {item}")
+        # We vergelijken de string direct
+        if item.get("datum") == vandaag:
+            gevonden = True
+            print(f"MATCH gevonden: {item}")
+            
+            # 4. Bericht opstellen
+            message = {
+                "content": (f"**Weerfeitje voor {vandaag}:**\n"
+                            f"Record: {item['record_type']}\n"
+                            f"Temperatuur: {item['temperatuur']}°C\n"
+                            f"Jaar: {item['jaar']}\n"
+                            f"Station: {item['station']}")
+            }
+            
+            # 5. Versturen naar Discord
+            if webhook_url:
+                response = requests.post(webhook_url, json=message)
+                print(f"Discord API status: {response.status_code}")
+            else:
+                print("ERROR: HISTORIE_WEBHOOK ontbreekt.")
+
+    if not gevonden:
+        print(f"Geen records gevonden voor {vandaag}. Controleer je JSON-formaat.")
 
 if __name__ == "__main__":
     verstuur_weer_bericht()
