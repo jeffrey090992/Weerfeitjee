@@ -1,43 +1,35 @@
 import json
-import requests
+import datetime
 import os
-from datetime import datetime
 
-# 1. JSON inladen
-with open('weer_historie.json', 'r', encoding='utf-8') as f:
-    data = json.load(f)
+# 1. Bepaal de huidige datum in het formaat DD-MM
+vandaag = datetime.datetime.now().strftime("%d-%m")
+vandaag_zoekterm = vandaag.strip().lower()
 
-webhook_url = os.getenv('HISTORIE_WEBHOOK')
+def verstuur_weer_bericht():
+    # 2. Zorg dat het pad correct is
+    bestandspad = os.path.join(os.path.dirname(__file__), 'weer_historie.json')
+    
+    try:
+        with open(bestandspad, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Fout bij het openen van JSON: {e}")
+        return
 
-# 2. Vandaag bepalen (Nederlandse datum naar jouw JSON-formaat)
-maanden = {
-    "january": "januari", "february": "februari", "march": "maart", 
-    "april": "april", "may": "mei", "june": "juni", 
-    "july": "juli", "august": "augustus", "september": "september", 
-    "october": "oktober", "november": "november", "december": "december"
-}
+    # 3. Veilige loop met type-controle
+    for item in data:
+        # Controleer of item een dictionary is
+        if isinstance(item, dict):
+            # Gebruik .get() veilig
+            datum = item.get("datum", "")
+            if datum.strip().lower() == vandaag_zoekterm:
+                print(f"Match gevonden voor {vandaag}: {item}")
+                # Hier komt jouw logica om het bericht te sturen via de webhook
+                # bijv: requests.post(os.environ['HISTORIE_WEBHOOK'], json=item)
+        else:
+            # Als er per ongeluk een string in de lijst staat, negeren we deze
+            print(f"Skipping ongeldig item: {type(item)} - {item}")
 
-nu = datetime.now()
-dag = nu.strftime("%d") # bijv. "15"
-maand_engels = nu.strftime("%B").lower() # bijv. "july"
-vandaag_zoekterm = f"{dag.lstrip('0')} {maanden[maand_engels]}" # "15 juli"
-
-# 3. Zoeken en versturen
-gevonden = False
-for sublijst in data:
-    for item in sublijst:
-        # Vergelijken zonder hoofdletters/spaties
-        if item.get("datum", "").strip().lower() == vandaag_zoekterm:
-            bericht = {
-                "content": (
-                    f"📅 **Datum:** {item['datum']}\n"
-                    f"**{item['titel']}**\n"
-                    f"Jaar: {item['jaar']}\n"
-                    f"{item['tekst']}"
-                )
-            }
-            requests.post(webhook_url, json=bericht)
-            gevonden = True
-
-if not gevonden:
-    print(f"Geen feit gevonden voor vandaag: '{vandaag_zoekterm}'")
+if __name__ == "__main__":
+    verstuur_weer_bericht()
