@@ -1,0 +1,41 @@
+name: Live Weerbericht
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Draait elk uur
+  workflow_dispatch:
+
+jobs:
+  stuur-weer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verstuur data naar Discord
+        env:
+          WUG_API_KEY: ${{ secrets.WUG_API_KEY }}
+          WUG_STATION_ID: ${{ secrets.WUG_STATION_ID }}
+          DISCORD_WEBHOOK: ${{ secrets.STATION_WEBHOOK }}
+        run: |
+          # Data ophalen van Weather Underground
+          RESPONSE=$(curl -s "https://api.weather.com/v2/pws/observations/current?stationId=$WUG_STATION_ID&format=json&units=m&apiKey=$WUG_API_KEY")
+          
+          # Waarden extraheren met jq
+          TEMP=$(echo $RESPONSE | jq '.observations[0].metric.temp')
+          WIND=$(echo $RESPONSE | jq '.observations[0].metric.windSpeed')
+          HUMID=$(echo $RESPONSE | jq '.observations[0].humidity')
+          
+          # Versturen naar Discord via jouw webhook
+          curl -H "Content-Type: application/json" -X POST \
+          -d "{
+            \"username\": \"Weerstation Home\",
+            \"embeds\": [{
+              \"title\": \"📍 Live Weer vanuit de tuin\",
+              \"color\": 3447003,
+              \"fields\": [
+                {\"name\": \"🌡️ Temperatuur\", \"value\": \"$TEMP °C\", \"inline\": true},
+                {\"name\": \"🌬️ Wind\", \"value\": \"$WIND km/u\", \"inline\": true},
+                {\"name\": \"💧 Luchtvochtigheid\", \"value\": \"$HUMID %\", \"inline\": true}
+              ],
+              \"footer\": {\"text\": \"Laatste update\"},
+              \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"
+            }]
+          }" $DISCORD_WEBHOOK
