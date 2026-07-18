@@ -2,7 +2,7 @@ name: Live Weerbericht
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 * * * *' # Draait elk uur
   workflow_dispatch:
 
 jobs:
@@ -15,29 +15,35 @@ jobs:
           WUG_STATION_ID: ${{ secrets.WUG_STATION_ID }}
           DISCORD_WEBHOOK: ${{ secrets.STATION_WEBHOOK }}
         run: |
-          # 1. Data ophalen
-          RESPONSE=$(curl -s "https://api.weather.com/v2/pws/observations/current?stationId=$WUG_STATION_ID&format=json&units=m&apiKey=$WUG_API_KEY")
+          # Data ophalen
+          RESPONSE=$(curl -s -G "https://api.weather.com/v2/pws/observations/current" \
+            -d "stationId=$WUG_STATION_ID" \
+            -d "format=json" \
+            -d "units=m" \
+            -d "apiKey=$WUG_API_KEY")
           
-          # 2. DEBUG: Print de output in de logs om de structuur te zien
-          echo "Ruwe API response:"
-          echo $RESPONSE | jq .
+          # Waarden extraheren
+          TEMP=$(echo $RESPONSE | jq -r '.observations[0].metric.temp // "N/A"')
+          WIND=$(echo $RESPONSE | jq -r '.observations[0].metric.windSpeed // "N/A"')
+          HUMID=$(echo $RESPONSE | jq -r '.observations[0].humidity // "N/A"')
+          UV=$(echo $RESPONSE | jq -r '.observations[0].uv // "N/A"')
+          PRECIP=$(echo $RESPONSE | jq -r '.observations[0].metric.precipTotal // "0"')
+          PRESS=$(echo $RESPONSE | jq -r '.observations[0].metric.pressure // "N/A"')
           
-          # 3. Waarden extraheren (Let op: check in de logs of 'metric' de juiste hoofdmap is)
-          TEMP=$(echo $RESPONSE | jq -r '.observations[0].metric.temp')
-          WIND=$(echo $RESPONSE | jq -r '.observations[0].metric.windSpeed')
-          HUMID=$(echo $RESPONSE | jq -r '.observations[0].humidity')
-          
-          # 4. Versturen naar Discord
+          # Versturen naar Discord
           curl -H "Content-Type: application/json" -X POST \
           -d "{
             \"username\": \"Weerstation Home\",
             \"embeds\": [{
-              \"title\": \"📍 Live Weer vanuit de tuin\",
+              \"title\": \"📍 Weerstation Jef (Almelo)\",
               \"color\": 3447003,
               \"fields\": [
                 {\"name\": \"🌡️ Temperatuur\", \"value\": \"$TEMP °C\", \"inline\": true},
                 {\"name\": \"🌬️ Wind\", \"value\": \"$WIND km/u\", \"inline\": true},
-                {\"name\": \"💧 Luchtvochtigheid\", \"value\": \"$HUMID %\", \"inline\": true}
+                {\"name\": \"💧 Luchtvochtigheid\", \"value\": \"$HUMID %\", \"inline\": true},
+                {\"name\": \"☀️ UV-Index\", \"value\": \"$UV\", \"inline\": true},
+                {\"name\": \"🌧️ Neerslag (vandaag)\", \"value\": \"$PRECIP mm\", \"inline\": true},
+                {\"name\": \"🧭 Luchtdruk\", \"value\": \"$PRESS hPa\", \"inline\": true}
               ],
               \"footer\": {\"text\": \"Laatste update\"},
               \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"
