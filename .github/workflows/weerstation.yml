@@ -2,7 +2,7 @@ name: Live Weerbericht
 
 on:
   schedule:
-    - cron: '0 * * * *' # Draait elk uur
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -15,15 +15,19 @@ jobs:
           WUG_STATION_ID: ${{ secrets.WUG_STATION_ID }}
           DISCORD_WEBHOOK: ${{ secrets.STATION_WEBHOOK }}
         run: |
-          # Data ophalen van Weather Underground
+          # 1. Data ophalen
           RESPONSE=$(curl -s "https://api.weather.com/v2/pws/observations/current?stationId=$WUG_STATION_ID&format=json&units=m&apiKey=$WUG_API_KEY")
           
-          # Waarden extraheren met jq
-          TEMP=$(echo $RESPONSE | jq '.observations[0].metric.temp')
-          WIND=$(echo $RESPONSE | jq '.observations[0].metric.windSpeed')
-          HUMID=$(echo $RESPONSE | jq '.observations[0].humidity')
+          # 2. DEBUG: Print de output in de logs om de structuur te zien
+          echo "Ruwe API response:"
+          echo $RESPONSE | jq .
           
-          # Versturen naar Discord via jouw webhook
+          # 3. Waarden extraheren (Let op: check in de logs of 'metric' de juiste hoofdmap is)
+          TEMP=$(echo $RESPONSE | jq -r '.observations[0].metric.temp')
+          WIND=$(echo $RESPONSE | jq -r '.observations[0].metric.windSpeed')
+          HUMID=$(echo $RESPONSE | jq -r '.observations[0].humidity')
+          
+          # 4. Versturen naar Discord
           curl -H "Content-Type: application/json" -X POST \
           -d "{
             \"username\": \"Weerstation Home\",
