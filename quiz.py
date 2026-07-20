@@ -10,16 +10,17 @@ with open('vragen.json', 'r', encoding='utf-8') as f:
 # Kies een willekeurige vraag
 item = random.choice(vragen_lijst)
 
-webhook_url = os.environ['DISCORD_WEBHOOK']
+# Gebruik de correcte env-naam
+webhook_url = os.environ['VRAGEN_WEBHOOK']
 
 # Bouw de embed
-# We gebruiken een dictionary met alleen de image key als de url is ingevuld
 embed = {
     "title": "Raad het weer!",
     "description": item["vraag"],
     "color": 3447003
 }
 
+# Voeg alleen een afbeelding toe als er een url is ingevuld
 if item.get("image_url"):
     embed["image"] = {"url": item["image_url"]}
 
