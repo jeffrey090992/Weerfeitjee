@@ -1,0 +1,26 @@
+name: Dagelijkse Weer-Quiz
+
+on:
+  schedule:
+    - cron: '0 7 * * *' # Draait elke dag om 09:00 Nederlandse tijd (zomertijd)
+  workflow_dispatch: # Hiermee kun je de quiz ook handmatig starten via GitHub
+
+jobs:
+  quiz:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Installeer requests
+        run: pip install requests
+
+      - name: Verstuur quizvraag
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: python quiz.py
