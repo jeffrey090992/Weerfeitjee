@@ -2,8 +2,8 @@ name: Dagelijkse Weer-Quiz
 
 on:
   schedule:
-    - cron: '0 7 * * *' # Draait elke dag om 09:00 Nederlandse tijd (zomertijd)
-  workflow_dispatch: # Hiermee kun je de quiz ook handmatig starten via GitHub
+    - cron: '0 7 * * *' 
+  workflow_dispatch: 
 
 jobs:
   quiz:
@@ -22,5 +22,5 @@ jobs:
 
       - name: Verstuur quizvraag
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          VRAGEN_WEBHOOK: ${{ secrets.VRAGEN_WEBHOOK }}
         run: python quiz.py
