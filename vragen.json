@@ -4,39 +4,14 @@
     "image_url": "https://cdn.discordapp.com/attachments/1498400025816862770/1528721441099485336/14043376-1.jpg?ex=6a5f5449&is=6a5e02c9&hm=a08fbfadaaca234adc76d30dce51da9becbb4bbcc6ba2ed3bd508a58bea47741&"
   },
   {
-    "vraag": "Vraag 2",
-    "image_url": "link2.jpg"
+    "vraag": "Wat is de gemiddelde temperatuur vandaag voor deze tijd van het jaar? 🌡️",
+    "image_url": ""
   },
   {
-    "vraag": "Vraag 3",
+    "vraag": "Denken jullie dat we vandaag de zon gaan zien? ☀️",
     "image_url": ""
   }
-]
-[
-  {
-    "vraag": "Vraag 1",
-    "image_url": "link1.jpg"
-  },
-  {
-    "vraag": "Vraag 2",
-    "image_url": "link2.jpg"
-  },
-  {
-    "vraag": "Vraag 3",
-    "image_url": ""
-  }
-]
-[
-  {
-    "vraag": "Vraag 1",
-    "image_url": "link1.jpg"
-  },
-  {
-    "vraag": "Vraag 2",
-    "image_url": "link2.jpg"
-  },
-  {
-    "vraag": "Vraag 3",
-    "image_url": ""
-  }
+  
+  /* Kopieer en plak de bovenstaande regels om tot 365 te komen. 
+     Zorg dat elk blok wordt afgesloten met een komma, behalve de allerlaatste. */
 ]
