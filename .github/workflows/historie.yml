@@ -3,10 +3,9 @@ name: Weerhistorie
 on:
   workflow_dispatch:
   schedule:
-    # Draait om 06:30 UTC
-    # Zomertijd (nu): 08:30 Nederlandse tijd
-    # Wintertijd: 07:30 Nederlandse tijd
-    - cron: '30 6 * * *'
+    # Zomertijd (nu): 05:30 Nederlandse tijd (03:30 UTC)
+    # Wintertijd: 05:30 Nederlandse tijd (04:30 UTC)
+    - cron: '30 3 * * *'
 
 jobs:
   historie:
