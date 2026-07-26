@@ -531,6 +531,8 @@
   {"datum": "01-01", "record_type": "minimum_10cm_temperatuur": "", "jaar": "", "station": ""},
   {"datum": "01-04", "record_type": "hoogste_max", "temperatuur": "22,4", "jaar": "2014", "station": "Ell"},
   {"datum": "01-04", "record_type": "laagste_min", "temperatuur": "-8,8", "jaar": "1996", "station": "Twenthe"},
+]
+[
   {"datum": "02-04", "record_type": "hoogste_max", "temperatuur": "25,0", "jaar": "2011", "station": "Eindhoven"},
   {"datum": "02-04", "record_type": "laagste_min", "temperatuur": "-8,7", "jaar": "1996", "station": "Twenthe"},
   {"datum": "03-04", "record_type": "hoogste_max", "temperatuur": "26,3", "jaar": "1926", "station": "Maastricht"},
