@@ -1082,5 +1082,5 @@
   {"datum": "30-12", "record_type": "hoogste_max", "temperatuur": "15,5", "jaar": "2021", "station": "Eindhoven"},
   {"datum": "30-12", "record_type": "laagste_min", "temperatuur": "-16,4", "jaar": "1950", "station": "Maastricht"},
   {"datum": "31-12", "record_type": "hoogste_max", "temperatuur": "17,6", "jaar": "2022", "station": "Arcen"},
-  {"datum": "31-12", "record_type": "laagste_min", "temperatuur": "-22,0", "jaar": "1923", "station": "Eelde"}
-    ]
+  {"datum": "31-12", "record_type": "laagste_min", "temperatuur": "-22,0", "jaar": "1923", "station": "Eelde"}  
+]
