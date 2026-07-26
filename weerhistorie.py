@@ -16,10 +16,14 @@ def verstuur_weer_bericht():
         print(f"Fout bij inladen JSON: {e}")
         return
 
-    # 3. Vertaallijst
+    # 3. Vertaallijst (uitgebreid met alle recordtypes)
     labels = {
         "hoogste_max": "☀️ Hoogste maximumtemperatuur",
-        "laagste_min": "❄️ Laagste minimumtemperatuur"
+        "laagste_min": "❄️ Laagste minimumtemperatuur",
+        "laagste_max": "⛅ Laagste maximumtemperatuur",
+        "hoogste_min": "🌡️ Hoogste minimumtemperatuur",
+        "hoogste_dagsom_neerslag": "🌧️ Hoogste dagsom neerslag",
+        "minimum_10cm_temperatuur": "🌱 Minimum temperatuur op 10 cm"
     }
 
     # 4. Zoeken naar matches
@@ -34,8 +38,17 @@ def verstuur_weer_bericht():
             gevonden = True
             
             # Bepaal titel en kleur
-            titel_tekst = labels.get(item['record_type'], item['record_type'])
-            kleur = 16753920 if "hoogste" in item['record_type'] else 3447003
+            record_type = item.get('record_type', '')
+            titel_tekst = labels.get(record_type, record_type)
+            kleur = 16753920 if "hoogste" in record_type else 3447003
+            
+            # Bepaal of het om temperatuur of millimeters (neerslag) gaat
+            if "mm" in item:
+                waarde_tekst = f"{item['mm']} mm"
+                veld_naam = "Neerslag"
+            else:
+                waarde_tekst = f"{item.get('temperatuur', '')}°C"
+                veld_naam = "Temperatuur"
             
             # 5. Discord Embed opmaak
             message = {
@@ -45,9 +58,9 @@ def verstuur_weer_bericht():
                     "color": kleur,
                     "fields": [
                         {"name": "Type record", "value": titel_tekst, "inline": False},
-                        {"name": "Temperatuur", "value": f"{item['temperatuur']}°C", "inline": True},
-                        {"name": "Jaar", "value": str(item['jaar']), "inline": True},
-                        {"name": "Station", "value": item['station'], "inline": True}
+                        {"name": veld_naam, "value": waarde_tekst, "inline": True},
+                        {"name": "Jaar", "value": str(item.get('jaar', '')), "inline": True},
+                        {"name": "Station", "value": item.get('station', ''), "inline": True}
                     ]
                 }]
             }
