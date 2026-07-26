@@ -16,7 +16,7 @@ def verstuur_weer_bericht():
         print(f"Fout bij inladen JSON: {e}")
         return
 
-    # 3. Vertaallijst (uitgebreid met alle recordtypes)
+    # 3. Vertaallijst
     labels = {
         "hoogste_max": "☀️ Hoogste maximumtemperatuur",
         "laagste_min": "❄️ Laagste minimumtemperatuur",
@@ -32,15 +32,11 @@ def verstuur_weer_bericht():
         print("Fout: HISTORIE_WEBHOOK niet gevonden in omgeving.")
         return
 
-    gevonden = False
+    fields = []
     for item in data:
         if isinstance(item, dict) and item.get("datum") == vandaag:
-            gevonden = True
-            
-            # Bepaal titel en kleur
             record_type = item.get('record_type', '')
             titel_tekst = labels.get(record_type, record_type)
-            kleur = 16753920 if "hoogste" in record_type else 3447003
             
             # Bepaal of het om temperatuur of millimeters (neerslag) gaat
             if "mm" in item:
@@ -50,26 +46,29 @@ def verstuur_weer_bericht():
                 waarde_tekst = f"{item.get('temperatuur', '')}°C"
                 veld_naam = "Temperatuur"
             
-            # 5. Discord Embed opmaak
-            message = {
-                "embeds": [{
-                    "title": f"Dagrecord - {vandaag}",
-                    "description": f"Op deze dag in de geschiedenis:",
-                    "color": kleur,
-                    "fields": [
-                        {"name": "Type record", "value": titel_tekst, "inline": False},
-                        {"name": veld_naam, "value": waarde_tekst, "inline": True},
-                        {"name": "Jaar", "value": str(item.get('jaar', '')), "inline": True},
-                        {"name": "Station", "value": item.get('station', ''), "inline": True}
-                    ]
-                }]
-            }
+            jaar_station = f"{item.get('jaar', '')} ({item.get('station', '')})"
             
-            # Versturen
-            response = requests.post(webhook_url, json=message)
-            print(f"Verstuurd! Status code: {response.status_code}")
+            # Voeg velden toe aan de lijst in plaats van direct te versturen
+            fields.append({
+                "name": titel_tekst, 
+                "value": f"**{waarde_tekst}** in {jaar_station}", 
+                "inline": False
+            })
 
-    if not gevonden:
+    # 5. Alles verzenden in ÉÉN bericht als er records zijn gevonden
+    if fields:
+        message = {
+            "embeds": [{
+                "title": f"Dagrecords - {vandaag}",
+                "description": "Alle weerrecords voor deze dag in de geschiedenis:",
+                "color": 16753920,
+                "fields": fields
+            }]
+        }
+        
+        response = requests.post(webhook_url, json=message)
+        print(f"Verstuurd! Status code: {response.status_code}")
+    else:
         print("Geen records gevonden voor vandaag.")
 
 if __name__ == "__main__":
