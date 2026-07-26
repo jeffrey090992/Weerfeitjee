@@ -766,7 +766,7 @@
   {"datum": "26-07", "record_type": "laagste_max", "temperatuur": "13,5", "jaar": "1919", "station": "De Kooy"},
   {"datum": "26-07", "record_type": "hoogste_min", "temperatuur": "23,1", "jaar": "2019", "station": "Twenthe"},
   {"datum": "26-07", "record_type": "hoogste_dagsom_neerslag", "mm": "42,1", "jaar": "2008", "station": "Leeuwarden"},
-  {"datum": "26-07", "record_type": "minimum_10cm_temperatuur",: "2,9", "jaar": "1998", "station": "Eelde"},
+  {"datum": "26-07", "record_type": "minimum_10cm_temperatuur", "temperatuur": "2,9", "jaar": "1998", "station": "Eelde"},
   {"datum": "27-07", "record_type": "hoogste_max", "temperatuur": "38,1", "jaar": "2018", "station": "Westdorpe"},
   {"datum": "27-07", "record_type": "laagste_min", "temperatuur": "4,7", "jaar": "1963", "station": "Soesterberg"},
   {"datum": "28-07", "record_type": "hoogste_max", "temperatuur": "35,7", "jaar": "1921", "station": "Maastricht"},
