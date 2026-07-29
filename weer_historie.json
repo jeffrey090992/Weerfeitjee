@@ -1259,7 +1259,7 @@
   {"datum": "28-07", "record_type": "hoogste_min", "temperatuur": "20,9", "jaar": "2006", "station": "Lauwersoog"},
   {"datum": "28-07", "record_type": "hoogste_dagsom_neerslag", "mm": "131,6", "jaar": "2014", "station": "Deelen"},
   {"datum": "28-07", "record_type": "minimum_10cm_temperatuur", "temperatuur": "2,2", "jaar": "2022", "station": "Eelde"},
-  {"datum": "29-07", "record_type": "hoogste_max", "temperatuur": "34,3", "jaar": "1969", "station": "Eelde"},
+  {"datum": "29-07", "record_type": "hoogste_max", "temperatuur": "35,8", "jaar": "2026", "station": "Westdorpe"},
   {"datum": "29-07", "record_type": "laagste_min", "temperatuur": "3,9", "jaar": "1962", "station": "Soesterberg"},
   {"datum": "29-07", "record_type": "laagste_max", "temperatuur": "14,1", "jaar": "1919", "station": "De Kooy"},
   {"datum": "29-07", "record_type": "hoogste_min", "temperatuur": "21,2", "jaar": "2002", "station": "De Kooy"},
