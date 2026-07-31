@@ -1690,7 +1690,7 @@
   {"datum": "08-10", "record_type": "laagste_max", "temperatuur": "", "jaar": "", "station": ""},
   {"datum": "08-10", "record_type": "hoogste_min", "temperatuur": "", "jaar": "1", "station": ""},
   {"datum": "08-10", "record_type": "hoogste_dagsom_neerslag", "mm": "", "jaar": "", "station": ""},
-  {"datum": "08-10", "record_type": "minimum_10cm_temperatuur", "temperatuur": "", "jaar": "", station": ""},
+  {"datum": "08-10", "record_type": "minimum_10cm_temperatuur", "temperatuur": "", "jaar": "", "station": ""},
   {"datum": "09-10", "record_type": "hoogste_max", "temperatuur": "28,2", "jaar": "1921", "station": "Maastricht"},
   {"datum": "09-10", "record_type": "laagste_min", "temperatuur": "-1,5", "jaar": "1936", "station": "Maastricht"},
   {"datum": "09-10", "record_type": "laagste_max", "temperatuur": "", "jaar": "", "station": ""},
