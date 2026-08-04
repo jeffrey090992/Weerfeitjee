@@ -1298,7 +1298,7 @@
   {"datum": "04-08", "record_type": "hoogste_max", "temperatuur": "36,3", "jaar": "1990", "station": "Arcen"},
   {"datum": "04-08", "record_type": "laagste_min", "temperatuur": "4,8", "jaar": "1996", "station": "Eelde"},
   {"datum": "04-08", "record_type": "laagste_max", "temperatuur": "15,0", "jaar": "1922", "station": "De Kooy"},
-  {"datum": "04-08", "record_type": "hoogste_min", "temperatuur": "20,5", "jaar": "1994", "station": "De Kooy"},
+  {"datum": "04-08", "record_type": "hoogste_min", "temperatuur": "21,1", "jaar": "2026", "station": "Horst"},
   {"datum": "04-08", "record_type": "hoogste_dagsom_neerslag", "mm": "55,2", "jaar": "2006", "station": "Hupsel"},
   {"datum": "04-08", "record_type": "minimum_10cm_temperatuur", "temperatuur": "2,7", "jaar": "1976", "station": "Eelde"},
   {"datum": "05-08", "record_type": "hoogste_max", "temperatuur": "33,5", "jaar": "1975", "station": "Hoek van Holland"},
