@@ -1304,7 +1304,7 @@
   {"datum": "05-08", "record_type": "hoogste_max", "temperatuur": "33,5", "jaar": "1975", "station": "Hoek van Holland"},
   {"datum": "05-08", "record_type": "laagste_min", "temperatuur": "5,1", "jaar": "1923", "station": "De Bilt"},
   {"datum": "05-08", "record_type": "laagste_max", "temperatuur": "14,7", "jaar": "1987", "station": "Soesterberg"},
-  {"datum": "05-08", "record_type": "hoogste_min", "temperatuur": "20,5", "jaar": "1975", "station": "IJmuiden en Hoek van Holland"},
+  {"datum": "05-08", "record_type": "hoogste_min", "temperatuur": "20,7", "jaar": "2026", "station": "Stavoren en Hoek van Holland"},
   {"datum": "05-08", "record_type": "hoogste_dagsom_neerslag", "mm": "72,1", "jaar": "2002", "station": "Westdorpe"},
   {"datum": "05-08", "record_type": "minimum_10cm_temperatuur", "temperatuur": "1,9", "jaar": "1989", "station": "Eindhoven"},
   {"datum": "06-08", "record_type": "hoogste_max", "temperatuur": "35,6", "jaar": "2003", "station": "Westdorpe"},
